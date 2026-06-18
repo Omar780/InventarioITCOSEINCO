@@ -194,7 +194,7 @@ footer{text-align:center;padding:28px;font-size:.74rem;color:var(--text3);border
       </div>
     </div>
   </div>
-  <span class="gen-date">Generado: 17 de junio de 2026</span>
+  <span class="gen-date">Generado: 18 de junio de 2026</span>
 </header>
 
 <div class="tabs">
@@ -234,8 +234,25 @@ footer{text-align:center;padding:28px;font-size:.74rem;color:var(--text3);border
   <div class="sec" id="sec-caducidad">
     <div class="sec-title">Informe de Caducidad Tecnológica</div>
     <div class="sec-sub">Análisis automático de hardware, SO y observaciones técnicas</div>
-    <div class="cad-header" id="cad-header"></div>
-    <div class="cad-list" id="cad-list"></div>
+    <div style="display:flex;gap:4px;margin-bottom:18px;background:var(--bg);padding:4px;border-radius:9px;width:fit-content">
+      <button id="cstab-dashboard" onclick="switchCadTab('dashboard')"
+        style="padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)">
+        📊 Dashboard
+      </button>
+      <button id="cstab-detalle" onclick="switchCadTab('detalle')"
+        style="padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:500;cursor:pointer;background:none;color:var(--text2)">
+        📋 Detalle
+      </button>
+    </div>
+    <!-- Dashboard view -->
+    <div id="cad-dash-wrap">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px" id="cad-dash-grid"></div>
+    </div>
+    <!-- Detalle view -->
+    <div id="cad-det-wrap" style="display:none">
+      <div class="cad-header" id="cad-header"></div>
+      <div class="cad-list" id="cad-list"></div>
+    </div>
   </div>
 
   <!-- ═ CRONOGRAMA ═ -->
@@ -259,7 +276,7 @@ footer{text-align:center;padding:28px;font-size:.74rem;color:var(--text3);border
       <div>
         <h3>Informe Tecnológico — FECUSAC</h3>
         <p>Este documento es confidencial y ha sido preparado por COSEINCO SA.<br>
-        Generado el 17 de junio de 2026 · Solo lectura · No contiene información editable.</p>
+        Generado el 18 de junio de 2026 · Solo lectura · No contiene información editable.</p>
       </div>
     </div>
     <div class="res-grid" id="info-grid"></div>
@@ -314,7 +331,7 @@ function evaluarEquipo(eq){
 function statusInfo(eq){
   const obs=(eq.OBSERVACIONES||'').toLowerCase();
   const bat=(eq.BATERIA||'').toLowerCase();
-  if(obs.includes('baja')||obs.includes('inactivo')||obs.includes('dañado')||obs.includes('danado'))return['pill-bad','Baja'];
+  if(obs.includes('baja')||obs.includes('inactivo')||obs.includes('dañado')||obs.includes('danado'))return['pill-bad','Prioridad'];
   if(obs.includes('cambiar')||obs.includes('revisar')||obs.includes('pendiente')||bat.includes('cambiar'))return['pill-warn','Atención'];
   return['pill-ok','Operativo'];
 }
@@ -323,7 +340,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 
 
 const EQUIPOS = [{"ITEM":"1","AREA":"CNC","USUARIO":"Neida Cusichi","TIPO":"LAPTOP","HOSTNAME":"DESKTOP-108UMRK","MARCA":"HP","MODELO":"15-dy5xxx","SERIE":"CD31161D4","PROCESADOR":"Core i3-1215U","PLACA":"","MEMORIA":"8GB","VIDEO":"Intel UHD Graphics","ALMACENAMIENTO":"128GB","BATERIA":"OK","SISTEMA":"WINDOWS 11 PRO","OFFICE":"office plus 2024","ANTIVIRUS":"NO","OBSERVACIONES":"Se recomienda aumentar la memoria","_id":"eq_1781624164295_1_v10"},{"ITEM":"2","AREA":"CNC","USUARIO":"Laidy Fernandez","TIPO":"LAPTOP","HOSTNAME":"Desktop-m7k6180","MARCA":"MSI","MODELO":"Gf65 thin 10 ser","SERIE":"9s716w1121088zl1000006","PROCESADOR":"Core i7-10750h","PLACA":"Gf65 thin 10 ser","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce RTX 2060","ALMACENAMIENTO":"SSD 1GB - SSD 480GB","BATERIA":"Ya paso su vida util","SISTEMA":"WINDOWS 10","OFFICE":"office plus 2024","ANTIVIRUS":"NO","OBSERVACIONES":"Se recomienda cambio de bateria","_id":"eq_1781624164295_2_gbl"},{"ITEM":"3","AREA":"CNC","USUARIO":"Ronal Huamani","TIPO":"LAPTOP","HOSTNAME":"Desktop - 0Qs5n28","MARCA":"HP","MODELO":"15-da0xxx","SERIE":"CND9242LXP","PROCESADOR":"Core i5-8250U","PLACA":"84a7","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce MX110","ALMACENAMIENTO":"SSD 512GB","BATERIA":"Sin carga, requiere cambio","SISTEMA":"WINDOWS 10","OFFICE":"office plus 2024","ANTIVIRUS":"NO","OBSERVACIONES":"Bisel en la parte superior se abre. No cuenta con los jebes de la base","_id":"eq_1781624164295_3_l9y"},{"ITEM":"4","AREA":"ADM","USUARIO":"Blanca Cortez","TIPO":"PC SFF","HOSTNAME":"Dekstop-tb43jili","MARCA":"DELL","MODELO":"OPTIPLEX 3080","SERIE":"9JDC4F3","PROCESADOR":"Core i5-10500","PLACA":"0HMF7C","MEMORIA":"16GB","VIDEO":"Intel UHD Graphics 630","ALMACENAMIENTO":"SSD 224GB","BATERIA":"","SISTEMA":"WINDOWS 11 PRO","OFFICE":"office plus 2024","ANTIVIRUS":"NO","OBSERVACIONES":"Se recomienda cambio de disco","_id":"eq_1781624164295_4_ahw"},{"ITEM":"5","AREA":"ADM","USUARIO":"Danna Fernandez","TIPO":"PC COMPATIBLE","HOSTNAME":"Fecu-101","MARCA":"Gigabyte","MODELO":"H81M-M","SERIE":"","PROCESADOR":"Core i5-4460","PLACA":"H81M-M","MEMORIA":"12GB","VIDEO":"Intel Graphics 4600","ALMACENAMIENTO":"HDD 1TB - SSD 224GB","BATERIA":"-","SISTEMA":"WINDOWS 10 PRO","OFFICE":"Office 365 sin licencia","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo es de una generacion antigua, se recomienda el cambio y baja","_id":"eq_1781624164295_5_hsn"},{"ITEM":"6","AREA":"ADM","USUARIO":"Kelly Vila","TIPO":"PC COMPATIBLE","HOSTNAME":"Desktop-MPUPM53","MARCA":"Gigabyte","MODELO":"H110M-H","SERIE":"","PROCESADOR":"Core i5-7400","PLACA":"H110M-H","MEMORIA":"16GB","VIDEO":"Intel UHD Graphics 630","ALMACENAMIENTO":"224GBSSD - 932HDD","BATERIA":"-","SISTEMA":"WINDOWS 10 PRO","OFFICE":"office plus 2024","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo es de una generacion antigua, se recomienda el cambio","_id":"eq_1781624164295_6_3n0"},{"ITEM":"7","AREA":"SSOMA","USUARIO":"Andrea","TIPO":"LAPTOP","HOSTNAME":"FECU-100","MARCA":"HP","MODELO":"15-da0xxx","SERIE":"CND9242LTG","PROCESADOR":"Core i5-8250U","PLACA":"84A7","MEMORIA":"32GB","VIDEO":"NVIDIA GeForce MX110","ALMACENAMIENTO":"258GB","BATERIA":"OK","SISTEMA":"WINDOWS 10 HOME","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"La unidad de disco puede ser cambiada por una mayor","_id":"eq_1781624164296_7_wfo"},{"ITEM":"8","AREA":"SSOMA","USUARIO":"Breno Alvarez","TIPO":"LAPTOP","HOSTNAME":"desktop-4tfir9n","MARCA":"HP","MODELO":"15-da0xxx","SERIE":"CND9242LM4","PROCESADOR":"Core i5-8250U","PLACA":"","MEMORIA":"32GB","VIDEO":"NVIDIA GeForce MX110","ALMACENAMIENTO":"SSD 500GB","BATERIA":"OK","SISTEMA":"WINDOWS 11 PRO","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"Falta jebe en base, chasis rajado en la parte delantera, actualizaciones pendientes","_id":"eq_1781624164296_8_61d"},{"ITEM":"9","AREA":"SST","USUARIO":"Luis Olortegui / Ruben Delgado","TIPO":"LAPTOP","HOSTNAME":"Desktop-l7p84vr","MARCA":"HP","MODELO":"15-fd0xxx","SERIE":"5CD43648JB","PROCESADOR":"Core i5-1235u","PLACA":"8CAA","MEMORIA":"16GB","VIDEO":"Intel iris Xe Graphics","ALMACENAMIENTO":"480GB","BATERIA":"OK","SISTEMA":"WINDOWS 11 PRO","OFFICE":"Office 365 sin licencia","ANTIVIRUS":"NO","OBSERVACIONES":"","_id":"eq_1781624164296_9_3yo"},{"ITEM":"10","AREA":"SST","USUARIO":"Luciano Criollo","TIPO":"LAPTOP","HOSTNAME":"LAPTOP-010PATJH","MARCA":"Lenovo","MODELO":"Y520-15IKBN","SERIE":"PF0QFB4","PROCESADOR":"Core i7-700HQ","PLACA":"Provence-5R1","MEMORIA":"32GB","VIDEO":"NVIDIA GeForce GTX 1050","ALMACENAMIENTO":"SSD 238 - HDD 1.80TB","BATERIA":"OK","SISTEMA":"WINDOWS 10 HOME","OFFICE":"Office 2016","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo es de una generacion antigua, se recomienda el cambio","_id":"eq_1781624164296_10_icj"},{"ITEM":"11","AREA":"SST","USUARIO":"Leonardo Casani","TIPO":"PC COMPATIBLE","HOSTNAME":"Desktop-LBI8SOG","MARCA":"ASUS","MODELO":"Prime H310m-e R2.0","SERIE":"","PROCESADOR":"Core i3-9100F","PLACA":"Prime H310m-e R2.0","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce GT 1030","ALMACENAMIENTO":"HHD 1TB","BATERIA":"-","SISTEMA":"WINDOWS 10 PRO FOR WORKSTATIONS","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo un disco mecanico, se recomienda colocar un solido como principal","_id":"eq_1781624164296_11_cv4"},{"ITEM":"12","AREA":"SST","USUARIO":"Cristian Jorge","TIPO":"PC COMPATIBLE","HOSTNAME":"Desktop-v847mqg","MARCA":"ASUS","MODELO":"Prime H310m-e R2.0","SERIE":"","PROCESADOR":"Core i3-9100f","PLACA":"Prime H310m-e R2.0","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce GT 1030","ALMACENAMIENTO":"SSD 500GB-1TB","BATERIA":"-","SISTEMA":"WINDOWS 10","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"","_id":"eq_1781624164296_12_xny"},{"ITEM":"13","AREA":"SST","USUARIO":"Juan Ayosa","TIPO":"PC COMPATIBLE","HOSTNAME":"Desktop-S7icr1f","MARCA":"ASUS","MODELO":"TUF GAMING B450-plus II","SERIE":"","PROCESADOR":"AMD RYZEN 5 2600","PLACA":"TUF GAMING B450-plus II","MEMORIA":"16GB","VIDEO":"NVIDIA QUADRO","ALMACENAMIENTO":"SSD 228GB - HDD 708GB","BATERIA":"-","SISTEMA":"WINDOWS 11 PRO","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"","_id":"eq_1781624164296_13_qao"},{"ITEM":"14","AREA":"PROYECTOS","USUARIO":"Yordi","TIPO":"LAPTOP","HOSTNAME":"DESKTOP-CN9C6U","MARCA":"DELL","MODELO":"Presicion M3800","SERIE":"4H8TP12","PROCESADOR":"Core i7-4712HQ","PLACA":"","MEMORIA":"16GB","VIDEO":"NVIDIA Quadro K1100M","ALMACENAMIENTO":"500GB","BATERIA":"No tiene bateria","SISTEMA":"WINDOWS 10 PRO","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo es de una generacion antigua, se recomienda el cambio y baja","_id":"eq_1781624164296_14_qvn"},{"ITEM":"15","AREA":"PROYECTOS","USUARIO":"Abraham Fernandez","TIPO":"LAPTOP","HOSTNAME":"Desktop-RHODATF","MARCA":"HP","MODELO":"15-da0xxx","SERIE":"CND9242LJQ","PROCESADOR":"Core i5-8250U","PLACA":"84A7","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce MX110","ALMACENAMIENTO":"SSD 480GB","BATERIA":"Bateria hinchada","SISTEMA":"WINDOWS 10 PRO","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"La bateria esta hinchada, se dedeb cambiar","_id":"eq_1781624164296_15_cx7"},{"ITEM":"16","AREA":"LOGISTICA","USUARIO":"David","TIPO":"PC COMPATIBLE","HOSTNAME":"Desktop-49fcrih","MARCA":"ASUS","MODELO":"P8Z77-M","SERIE":"","PROCESADOR":"Core i7-3770","PLACA":"P8Z77-M","MEMORIA":"16GB","VIDEO":"NVIDIA GeForce GTX 550 Ti","ALMACENAMIENTO":"HDD 1TB","BATERIA":"-","SISTEMA":"WINDOWS 10 LTSC","OFFICE":"office 2016","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo es de una generacion antigua, se recomienda el cambio y baja","_id":"eq_1781624164296_16_euz"},{"ITEM":"17","AREA":"LOGISTICA","USUARIO":"Luis Enzo","TIPO":"LAPTOP","HOSTNAME":"Desktop-1G976G7","MARCA":"HP","MODELO":"15-fd0xxx","SERIE":"5CD4364488","PROCESADOR":"Core i5-1235u","PLACA":"8CAA","MEMORIA":"8GB","VIDEO":"Intel UHD Grphics","ALMACENAMIENTO":"NVMe 500GB","BATERIA":"OK","SISTEMA":"WINDOWS 11 PRO","OFFICE":"Office LTSC 2021","ANTIVIRUS":"NO","OBSERVACIONES":"EL equipo tiene poca ram, se recomienda el aumento","_id":"eq_1781624164296_17_vr1"},{"ITEM":"18","AREA":"ALMACEN","USUARIO":"Alexis","TIPO":"PC SFF","HOSTNAME":"Des","MARCA":"DELL","MODELO":"OPTIPLEX 3080","SERIE":"4JDC4F3","PROCESADOR":"Core i5-10500","PLACA":"0HMF7C","MEMORIA":"16GB","VIDEO":"Intel UHD Graphics 630","ALMACENAMIENTO":"HDD 1TB","BATERIA":"OK","SISTEMA":"WINDOWS 11 PRO","OFFICE":"","ANTIVIRUS":"NO","OBSERVACIONES":"El equipo un disco mecanico, se recomienda colocar un solido","_id":"eq_1781624164296_18_fea"},{"ITEM":"19","AREA":"CNC","USUARIO":"Neida Cusichi","TIPO":"IMPRESORA","HOSTNAME":"-","MARCA":"EPSON","MODELO":"L6171 NR","SERIE":"X4ET009911","PROCESADOR":"-","PLACA":"-","MEMORIA":"-","VIDEO":"-","ALMACENAMIENTO":"-","BATERIA":"OK","SISTEMA":"-","OFFICE":"-","ANTIVIRUS":"-","OBSERVACIONES":"","_id":"eq_1781624164296_19_83j"},{"ITEM":"20","AREA":"ADM","USUARIO":"Blanca Cortez","TIPO":"IMPRESORA","HOSTNAME":"-","MARCA":"BROTHER","MODELO":"dcp-t720Rw","SERIE":"u66054a4h25909","PROCESADOR":"-","PLACA":"-","MEMORIA":"-","VIDEO":"-","ALMACENAMIENTO":"-","BATERIA":"","SISTEMA":"-","OFFICE":"-","ANTIVIRUS":"-","OBSERVACIONES":"Base de escaner salido","_id":"eq_1781624164296_20_aca"},{"ITEM":"21","AREA":"ALMACEN","USUARIO":"Alexis","TIPO":"IMPRESORA","HOSTNAME":"-","MARCA":"XEROX","MODELO":"WorkCenter 3225","SERIE":"3381245330","PROCESADOR":"-","PLACA":"-","MEMORIA":"-","VIDEO":"-","ALMACENAMIENTO":"-","BATERIA":"-","SISTEMA":"-","OFFICE":"-","ANTIVIRUS":"-","OBSERVACIONES":"","_id":"eq_1781624164296_21_t6o"}];
-const RESUMEN = {};
+const RESUMEN = {"empresa":"COMERCIALIZADORA AGROINDUSTRIAL FECU S.A.C.","responsable":"Laidy Fernandez","telefono":"+51 988 801 942","email":"lfernandez@fecusac.com","sede":"Cal. Leoncio Prado Mza. B1 Lote. 13 P.J. Mateo Pumacahua (Alt. Comisaria de Mateo Pumacahua) - Santiago de Surco","ruc":"20492404064","fecha_inv":"06/06/2026","fecha_upd":"","total":"","operativos":"","baja":"","proveedor_inet":"","ancho_banda":"","servidor":"","dominio":"","antivirus_corp":"","backup":"","obs_gral":""};
 const CLIENT_NAME = "FECUSAC";
 const CAMPOS_SHOW = ['ITEM','AREA','USUARIO','TIPO','HOSTNAME','MARCA','MODELO','SERIE','PROCESADOR','PLACA','MEMORIA','VIDEO','ALMACENAMIENTO','BATERIA','SISTEMA','OFFICE','ANTIVIRUS','OBSERVACIONES'];
 
@@ -334,10 +351,24 @@ function switchTab(tab){
   document.getElementById('sec-'+tab).classList.add('active');
   if(tab==='galeria') renderGaleria(EQUIPOS);
   if(tab==='tabla') renderTabla(EQUIPOS);
-  if(tab==='caducidad') renderCaducidad(EQUIPOS);
+  if(tab==='caducidad'){renderCadDashboard(EQUIPOS);renderCaducidadDetalle(EQUIPOS);}
   if(tab==='cronograma') renderCronograma(EQUIPOS);
   if(tab==='stats') renderStats(EQUIPOS);
   if(tab==='info') renderInfo();
+}
+
+function switchCadTab(tab){
+  document.getElementById('cad-dash-wrap').style.display = tab==='dashboard' ? '' : 'none';
+  document.getElementById('cad-det-wrap').style.display  = tab==='detalle'   ? '' : 'none';
+  const dash=document.getElementById('cstab-dashboard');
+  const det =document.getElementById('cstab-detalle');
+  if(tab==='dashboard'){
+    dash.style.cssText='padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)';
+    det.style.cssText ='padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:500;cursor:pointer;background:none;color:var(--text2)';
+  } else {
+    det.style.cssText ='padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)';
+    dash.style.cssText='padding:6px 14px;border:none;border-radius:7px;font-size:.8rem;font-weight:500;cursor:pointer;background:none;color:var(--text2)';
+  }
 }
 
 // ── GALERÍA ──
@@ -396,8 +427,121 @@ function filterTabla(q){
 }
 function statusPill(eq){const[c,l]=statusInfo(eq);return`<span class="status-pill ${c}">${l}</span>`;}
 
-// ── CADUCIDAD ──
-function renderCaducidad(eqs){
+// ── CADUCIDAD DASHBOARD ──
+function renderCadDashboard(eqs){
+  const grid=document.getElementById('cad-dash-grid');
+  if(!eqs||!eqs.length){grid.innerHTML='<div class="empty-msg">Sin equipos</div>';return;}
+  const evaluated=eqs.map(eq=>({eq,...evaluarEquipo(eq)}));
+  const total=evaluated.length;
+  const counts={critical:0,medium:0,low:0,ok:0};
+  evaluated.forEach(e=>counts[e.severity]++);
+  const reasonFreq={};
+  evaluated.forEach(({reasons})=>reasons.forEach(r=>{reasonFreq[r.t]=(reasonFreq[r.t]||0)+1;}));
+  const topReasons=Object.entries(reasonFreq).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  const byArea={};
+  evaluated.forEach(({eq,severity})=>{
+    const a=eq.AREA||'Sin área';
+    if(!byArea[a])byArea[a]={critical:0,medium:0,low:0,ok:0,total:0};
+    byArea[a][severity]++;byArea[a].total++;
+  });
+  const topAreas=Object.entries(byArea).sort((a,b)=>b[1].critical-a[1].critical||(b[1].medium-a[1].medium)).slice(0,6);
+  const byTipo={};
+  evaluated.forEach(({eq,severity})=>{
+    const t=eq.TIPO||'OTRO';
+    if(!byTipo[t])byTipo[t]={critical:0,medium:0,low:0,ok:0,total:0};
+    byTipo[t][severity]++;byTipo[t].total++;
+  });
+  const worst=evaluated.filter(e=>e.severity!=='ok').sort((a,b)=>b.score-a.score).slice(0,5);
+  const healthScore=Math.round(100-((counts.critical*4+counts.medium*2+counts.low*1)/(total*4))*100);
+  const healthColor=healthScore>=75?'#16a34a':healthScore>=50?'#d97706':healthScore>=25?'#ea580c':'#dc2626';
+  const R=40,C=2*Math.PI*R,fill=(healthScore/100)*C;
+  const scoreColor=s=>s>=40?'#dc2626':s>=20?'#ea580c':s>=8?'#d97706':'#16a34a';
+  const scoreBg=s=>s>=40?'#fef2f2':s>=20?'#fff7ed':s>=8?'#fffbeb':'#f0fdf4';
+  function stackedBar(d){
+    const t=d.total||1;
+    return[{k:'critical',c:'#dc2626'},{k:'medium',c:'#ea580c'},{k:'low',c:'#d97706'},{k:'ok',c:'#16a34a'}]
+      .map(s=>{const pct=(d[s.k]/t*100).toFixed(1);return parseFloat(pct)>0?`<div style="width:${pct}%;background:${s.c};height:100%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:#fff;overflow:hidden">${parseFloat(pct)>8?s.k[0].toUpperCase():''}</div>`:''}).join('');
+  }
+  const CHART_COLORS=['#2563eb','#7c3aed','#db2777','#ea580c','#d97706','#16a34a','#0891b2','#4f46e5'];
+  const card=(title,body)=>`<div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+    <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:16px">${title}</div>
+    ${body}</div>`;
+  grid.innerHTML=
+  card('🏥 Índice de Salud Tecnológica',`
+    <div style="display:flex;align-items:center;gap:20px">
+      <svg width="100" height="100" viewBox="0 0 100 100" style="flex-shrink:0">
+        <circle cx="50" cy="50" r="${R}" fill="none" stroke="#e4e7ec" stroke-width="10"/>
+        <circle cx="50" cy="50" r="${R}" fill="none" stroke="${healthColor}" stroke-width="10"
+          stroke-dasharray="${fill} ${C}" stroke-dashoffset="${C*.25}"
+          stroke-linecap="round" transform="rotate(-90 50 50)"/>
+      </svg>
+      <div>
+        <div style="font-size:2rem;font-weight:800;color:${healthColor};line-height:1">${healthScore}<span style="font-size:1rem;font-weight:400;color:var(--text2)">%</span></div>
+        <div style="font-size:.75rem;color:var(--text2);margin-top:4px">${healthScore>=75?'Flota en buen estado':healthScore>=50?'Requiere atención':healthScore>=25?'Estado crítico':'Renovación urgente'}</div>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+          ${[['#dc2626','Críticos',counts.critical],['#ea580c','Moderados',counts.medium],['#d97706','Bajo riesgo',counts.low],['#16a34a','Vigentes',counts.ok]].map(([c,l,v])=>
+            `<div style="display:flex;align-items:center;gap:7px;font-size:.74rem;color:var(--text2)">
+              <span style="width:9px;height:9px;border-radius:50%;background:${c};flex-shrink:0"></span>${l}:
+              <b style="margin-left:auto;color:${c}">${v}</b></div>`).join('')}
+        </div>
+      </div>
+    </div>`)+
+  card('📦 Distribución por Estado',`
+    <div style="display:grid;gap:4px;height:130px;grid-template-rows:1.2fr 0.8fr;margin-bottom:10px">
+      <div style="display:flex;gap:4px">${counts.critical>0?`<div style="flex:${counts.critical};background:#dc2626;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column"><div style="font-size:.9rem;font-weight:800;color:#fff">${counts.critical}</div><div style="font-size:.6rem;color:rgba(255,255,255,.85)">Críticos</div></div>`:''}${counts.medium>0?`<div style="flex:${counts.medium};background:#ea580c;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column"><div style="font-size:.9rem;font-weight:800;color:#fff">${counts.medium}</div><div style="font-size:.6rem;color:rgba(255,255,255,.85)">Moderados</div></div>`:''}</div>
+      <div style="display:flex;gap:4px">${counts.low>0?`<div style="flex:${counts.low};background:#d97706;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column"><div style="font-size:.9rem;font-weight:800;color:#fff">${counts.low}</div><div style="font-size:.6rem;color:rgba(255,255,255,.85)">Bajo</div></div>`:''}${counts.ok>0?`<div style="flex:${counts.ok};background:#16a34a;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column"><div style="font-size:.9rem;font-weight:800;color:#fff">${counts.ok}</div><div style="font-size:.6rem;color:rgba(255,255,255,.85)">Vigentes</div></div>`:''}</div>
+    </div>
+    <div style="height:22px;border-radius:6px;overflow:hidden;display:flex">${stackedBar(counts)}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+      ${[['#dc2626','Crítico',counts.critical],['#ea580c','Moderado',counts.medium],['#d97706','Bajo',counts.low],['#16a34a','Vigente',counts.ok]].map(([c,l,v])=>
+        `<div style="display:flex;align-items:center;gap:5px;font-size:.73rem;color:var(--text2)"><div style="width:10px;height:10px;border-radius:3px;background:${c}"></div>${l} ${((v/total)*100).toFixed(0)}%</div>`).join('')}
+    </div>`)+
+  card('⚠️ Principales Motivos de Riesgo',
+    topReasons.map(([reason,count],i)=>{
+      const colors=['#dc2626','#ea580c','#ea580c','#d97706','#d97706','#d97706','#98a2b3'];
+      const c=colors[i]||'#98a2b3';const pct=Math.round((count/total)*100);
+      return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
+        <div style="width:120px;font-size:.7rem;color:var(--text2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(reason)}">${esc(reason)}</div>
+        <div style="flex:1;background:var(--bg);border-radius:4px;height:14px;overflow:hidden"><div style="width:${pct}%;background:${c};height:100%;border-radius:4px"></div></div>
+        <div style="font-size:.7rem;color:var(--text2);width:40px;text-align:right">${count} (${pct}%)</div>
+      </div>`;
+    }).join('')||'<div style="color:var(--text3);font-size:.8rem;text-align:center;padding:20px">Sin problemas detectados</div>')+
+  card('🏢 Riesgo por Área',
+    topAreas.map(([area,d])=>`
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:.78rem;font-weight:600;color:var(--text)">${esc(area)}</span>
+          <span style="font-size:.7rem;color:var(--text3)">${d.total} eq.</span>
+        </div>
+        <div style="height:18px;border-radius:4px;overflow:hidden;display:flex">${stackedBar(d)}</div>
+      </div>`).join('')||'<div style="color:var(--text3);font-size:.8rem;text-align:center;padding:20px">Sin áreas</div>')+
+  card('💻 Estado por Tipo de Equipo',`
+    <table style="width:100%;font-size:.76rem;border-collapse:collapse">
+      ${Object.entries(byTipo).sort((a,b)=>b[1].critical-a[1].critical).map(([tipo,d])=>{
+        const pctRisk=Math.round(((d.critical+d.medium)/d.total)*100);
+        const c=pctRisk>=60?'#dc2626':pctRisk>=30?'#ea580c':'#16a34a';
+        return`<tr><td style="padding:6px 8px;border-bottom:1px solid var(--border)">${esc(tipo)}<br><span style="font-size:.68rem;color:var(--text3)">${d.total} equipos · ${d.critical} crítico${d.critical!==1?'s':''}</span></td>
+          <td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:right">
+            <span style="color:${c};font-weight:700">${pctRisk}%</span>
+            <div style="display:inline-block;height:5px;border-radius:3px;background:${c};width:${Math.max(pctRisk,4)}px;margin-left:6px;vertical-align:middle"></div>
+          </td></tr>`;
+      }).join('')}
+    </table>`)+
+  card('🔴 Equipos Más Críticos',
+    worst.length===0?'<div style="color:var(--text3);font-size:.8rem;text-align:center;padding:20px">¡Todos los equipos están en buen estado!</div>':
+    worst.map(({eq,score,reasons},i)=>`
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;background:var(--bg);margin-bottom:6px">
+        <div style="font-size:.7rem;font-weight:800;color:var(--text3);width:18px;text-align:center">${i+1}</div>
+        <div style="flex:1">
+          <div style="font-size:.82rem;font-weight:700;color:var(--text)">${esc(eq.HOSTNAME||eq.MODELO||'—')}</div>
+          <div style="font-size:.7rem;color:var(--text2)">${esc(eq.TIPO||'')} · ${esc(eq.AREA||'')} · ${reasons.slice(0,2).map(r=>r.t).join(', ')}</div>
+        </div>
+        <span style="font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:5px;background:${scoreBg(score)};color:${scoreColor(score)}">${score} pts</span>
+      </div>`).join(''));
+}
+
+// ── CADUCIDAD DETALLE ──
+function renderCaducidadDetalle(eqs){
   const evd=eqs.map(eq=>({eq,...evaluarEquipo(eq)})).sort((a,b)=>b.score-a.score);
   const counts={critical:0,medium:0,low:0,ok:0};
   evd.forEach(e=>counts[e.severity]++);
@@ -539,6 +683,8 @@ document.getElementById('modal-ver').addEventListener('click',function(e){if(e.t
 
 // ── INIT ──
 renderGaleria(EQUIPOS);
+// Pre-render caducidad dashboard so it's ready when tab is opened
+setTimeout(()=>{renderCadDashboard(EQUIPOS);renderCaducidadDetalle(EQUIPOS);},0);
 </script>
 </body>
 </html>
